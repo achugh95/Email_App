@@ -24,6 +24,9 @@ def send_email(request):
         logger.info('POST Method')
         form = SendEmail(request.POST)
         result = ''
+
+        recipient_list=[]
+
         if form.is_valid():
 
             # Manually opening the connection
@@ -35,16 +38,20 @@ def send_email(request):
             subject = form.cleaned_data['subject']
             body = form.cleaned_data['body']
             from_email = settings.EMAIL_HOST_USER
-            recipient_list = form.cleaned_data['to']
+            recipient_list += form.cleaned_data['to']
             cc_list = form.cleaned_data['cc']
             bcc_list = form.cleaned_data['bcc']
 
             # If the To field is populated via CSV File
-            if not recipient_list:
-                logger.info("No recipients in To field.")
+            try:
+                csv_file = request.FILES["csv_file"]
+
+                if not csv_file.name.endswith('.csv'):
+                    logger.error(request, 'This is not a CSV File.')
+                    result = 'This is not a CSV File.'
+                    return render(request, 'Email/Failed.html', {'result': result})
 
                 logger.info("CSV File detected.")
-                csv_file = request.FILES["csv_file"]
 
                 logger.info("Reading CSV File.")
                 file_data = csv_file.read().decode("utf-8")
@@ -62,14 +69,19 @@ def send_email(request):
                         valid_email = True
                     except ValidationError:
                         valid_email = False
-                        result = 'The CSV file contains Invalid email address: ', column[0]
+                        result += 'The CSV file contains Invalid email address: ' + str(column[0]) + ';  ;'
                         logger.error('The CSV file contains Invalid email address: ', column[0])
                     if valid_email:
                         emails.append(column[0])
 
-                # print('Emails:', emails)
+                recipient_list += emails
 
-                recipient_list = emails
+                # If all the emails failed the validation
+                if not recipient_list:
+                    return render(request, 'Email/Failed.html', {'result': result})
+
+            except Exception as e:
+                logger.info('Could not find any CSV File', e)
 
             logger.info('Email Fields:', subject, body, from_email, recipient_list, cc_list, bcc_list)
 
