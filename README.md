@@ -37,22 +37,31 @@
 
 - Email_App\myvenv\Lib\site-packages\eventlet\green\ssl.py
 
-if _is_under_py_3_7:
-    return super(GreenSSLSocket, cls).__new__(cls)
-else:
-    if not isinstance(sock, GreenSocket):
-        sock = GreenSocket(sock)
-    with _original_ssl_context():
-        ret = _original_wrap_socket(
-            sock=sock.fd,
-            keyfile=keyfile,
-            certfile=certfile,
-            server_side=server_side,
-            cert_reqs=cert_reqs,
-            ssl_version=ssl_version,
-            ca_certs=ca_certs,
-            do_handshake_on_connect=False,
-*args, **kw # Delete it! No commenting. ) ret.keyfile = keyfile ret.certfile = certfile ret.cert_reqs = cert_reqs ret.ssl_version = ssl_version ret.ca_certs = ca_certs ret.class = GreenSSLSocket return ret
+    if _is_under_py_3_7:
+        return super(GreenSSLSocket, cls).__new__(cls)
+    else:
+        if not isinstance(sock, GreenSocket):
+            sock = GreenSocket(sock)
+        with _original_ssl_context():
+            ret = _original_wrap_socket(
+                sock=sock.fd,
+                keyfile=keyfile,
+                certfile=certfile,
+                server_side=server_side,
+                cert_reqs=cert_reqs,
+                ssl_version=ssl_version,
+                ca_certs=ca_certs,
+                do_handshake_on_connect=False,
+*args, **kw										# Delete it! No commenting. 
+
+)
+ret.keyfile = keyfile
+ret.certfile = certfile
+ret.cert_reqs = cert_reqs
+ret.ssl_version = ssl_version
+ret.ca_certs = ca_certs
+ret.class = GreenSSLSocket
+return ret
 
 # Make sure all the below mentioned services are running
 elasticsearch
