@@ -1,0 +1,137 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Email App</title>
+    </head>
+
+    <body>
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <center>
+                        <table>
+                            <tr>
+
+                                <b><p> Welcome to our Email Application. </p></b>
+
+                            </tr>
+
+                             <tr>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    To :
+                                </td>
+
+                                <td>
+                                    {{ form.to }}
+                                </td>
+
+                                <td>
+                                    <label> File: </label>
+
+                                    <input type="file" name="csv_file" id="csv_file">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+<!--                                    <button> Upload </button>-->
+                                </td>
+
+                            </tr>
+
+                             <tr>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    Cc :
+                                </td>
+
+                                <td>
+                                    {{ form.cc }}
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    Bcc :
+                                </td>
+
+                                <td>
+                                    {{ form.bcc }}
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+
+
+                             <tr>
+                                <td>
+                                    Subject :
+                                </td>
+
+                                <td>
+                                    {{ form.subject }}
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+
+
+                             <tr>
+
+                                <td>
+                                    Body :
+                                </td>
+
+                                <td>
+                                    {{ form.body }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <br><br>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Send"/>
+                                </td>
+
+                            </tr>
+                        </table>
+                </center>
+            </form>
+
+    </body>
+</html>
