@@ -27,7 +27,7 @@
 
 4. Celery
 - Message Broker
-- Download Redis # We may use RabbitMQ or Amazon SQS, but the respective settings will have to modified accordingly in the Python Code
+- Download Redis # We may use RabbitMQ or Amazon SQS, but the respective settings will have to be modified accordingly in the Python Code
 - Run the server : redis-server
 - For Windows, an additional package is required : eventlet. This can be installed via pip. 
 - pip install eventlet
