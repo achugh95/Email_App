@@ -9,7 +9,7 @@ django-timezone-field==3.1
 dnspython==1.16.0
 elasticsearch==7.1.0
 elasticsearch-dsl==7.1.0
-eventlet==0.25.1
+eventlet==0.31.0
 greenlet==0.4.15
 importlib-metadata==0.23
 kombu==4.6.6
