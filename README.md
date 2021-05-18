@@ -72,6 +72,8 @@ redis-server
 ### To install the Django dependencies
 - pip install django-requirements.txt
 
+NOTE: The project is not actively maintained and hence for safe side, the virtual environment has been uploaded in the repository itself.
+
 ### Complete the Database migrations
 - python manage.py makemigrations
 - python manage.py migrate
