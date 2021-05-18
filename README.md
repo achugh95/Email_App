@@ -63,19 +63,19 @@ ret.ca_certs = ca_certs
 ret.class = GreenSSLSocket
 return ret
 
-# Make sure all the below mentioned services are running
+### Make sure all the below mentioned services are running
 elasticsearch
 logstash
 kibana
 redis-server
 
-# To install the Django dependencies
+### To install the Django dependencies
 - pip install django-requirements.txt
 
-# Complete the Database migrations
+### Complete the Database migrations
 - python manage.py makemigrations
 - python manage.py migrate
 
-# Run the following commands in two separate command prompts to start the Periodic Emails (after every 30 mins the Admin).
+### Run the following commands in two separate command prompts to start the Periodic Emails (after every 30 mins the Admin).
 - celery -A tasks beat --loglevel=info
 - celery -A tasks worker --pool=eventlet --loglevel=info
