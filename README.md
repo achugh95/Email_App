@@ -8,7 +8,7 @@
 
 1. Elastic Search
 - Download
-- Run bin\elasticsearch.bat
+- Run `bin\elasticsearch.bat`
 - http://localhost:9200
 
 2. LogStash
@@ -28,10 +28,13 @@
 4. Celery
 - Message Broker
 - Download Redis # We may use RabbitMQ or Amazon SQS, but the respective settings will have to be modified accordingly in the Python Code
-- Run the server : redis-server
+- Run the server  
+    - `redis-server`
+
 - For Windows, an additional package is required : eventlet. This can be installed via pip. 
-- pip install eventlet
-- celery -A your_app_name worker --pool=eventlet
+    - `pip install eventlet`
+    - `celery -A your_app_name worker --pool=eventlet`
+
 - When we run our Django server and the periodic task kicks in via beat, we may run into an ssl error.
 - Solution : Delete the following arguments :"*args, **kwargs" from the file eventlet\green\ssl.py.
 
@@ -70,14 +73,14 @@ kibana
 redis-server
 
 ### To install the Django dependencies
-- pip install django-requirements.txt
+- `pip install django-requirements.txt`
 
 NOTE: The project is not actively maintained and hence for safe side, the virtual environment has been uploaded in the repository itself.
 
 ### Complete the Database migrations
-- python manage.py makemigrations
-- python manage.py migrate
+- `python manage.py makemigrations`
+- `python manage.py migrate`
 
 ### Run the following commands in two separate command prompts to start the Periodic Emails (after every 30 mins the Admin).
-- celery -A tasks beat --loglevel=info
-- celery -A tasks worker --pool=eventlet --loglevel=info
+- `celery -A tasks beat --loglevel=info`
+- `celery -A tasks worker --pool=eventlet --loglevel=info`
